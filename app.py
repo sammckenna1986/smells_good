@@ -2,7 +2,6 @@ import os
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-import dns
 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'smells_good'
@@ -12,10 +11,13 @@ mongo = PyMongo(app)
 
 
 @app.route('/')
+def hello():
+    return 'Hello test'
+"""
 @app.route('/recipes')
-def get_tasks():
+def recipes():
     return render_template("home.html", recipes=mongo.db.recipes.find())
-
+"""
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
