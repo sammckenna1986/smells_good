@@ -11,9 +11,16 @@ mongo = PyMongo(app)
 
 
 @app.route('/')
-@app.route('/recipes')
-def recipes():
-    return render_template("home.html", recipes=mongo.db.recipes.find())
+@app.route('/recipes/<name>')
+def about_recipe(name):
+    recipe = {}
+    
+    data = mongo.db.recipes.find()
+    for obj in data:
+        if obj["recipe_name"] == name:
+            recipe = obj
+    return render_template("recipe.html", recipe=recipe)
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
