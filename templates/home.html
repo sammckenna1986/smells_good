@@ -1,6 +1,12 @@
+<!--
 {% extends 'base.html' %}
 {% block content %}
-<h5> This is content from the home.html<h5>
+-->
+<html>
+    <head>
+    </head>
+    <body>
+    <h5> This is content from the home.html<h5>
     {% for recipe in recipes %}
         {{recipe.created_at}}
         {{recipe.recipe_id}}
@@ -11,7 +17,10 @@
         {{recipe.category_id}}
         {{recipe.user_created}}
         {{recipe.recipe_deleted}}
-
     {% endfor %}
+    </body>
+</html>
+<!--
+    
 {% endblock %}
-
+-->
