@@ -11,13 +11,18 @@ mongo = PyMongo(app)
 
 
 @app.route('/')
-@app.route('/recipes/<name>')
-def about_recipe(name):
+
+@app.route('/recipe')
+def recipe():
+    data = mongo.db.recipes.find()
+    return render_template("recipe.html", page_title="Recipe", company=data)
+
+@app.route('/recipe/<dish>')
+def about_recipe(dish):
     recipe = {}
-    
     data = mongo.db.recipes.find()
     for obj in data:
-        if obj["recipe_name"] == name:
+        if obj["recipe_name"] == dish:
             recipe = obj
     return render_template("recipe.html", recipe=recipe)
 
