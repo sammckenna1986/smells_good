@@ -1,14 +1,14 @@
 {% extends 'base.html' %} {% block content %}
-
+{% for Recipe in recipes %}
 <div class="row">
     <div class="col-md-5">
-        <img src="{{ recipe.pic_url }}" alt="image for {{recipe.recipe_name}}" />
-        <h2 class="col-md-7">{{ recipe.recipe_name }}</h2>
+        <img src="{{ recipes.pic_url }}" alt="image for {{recipes.recipe_name}}" />
+        <h2 class="col-md-7">{{ recipes.recipe_name }}</h2>
     </div>
 </div>
 
 <div class="col-md-12">
-    <p>{{ recipe.recipe_description }}</p>
+    <p>{{ recipes.recipe_description }}</p>
 </div>
-
+{% endfor %}
 {% endblock %}

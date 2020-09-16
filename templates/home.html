@@ -1,26 +1,28 @@
-<!--
-{% extends 'base.html' %}
-{% block content %}
--->
 <html>
     <head>
     </head>
+
+
     <body>
-    <h5> This is content from the home.html<h5>
-    {% for recipe in recipes %}
-        {{recipe.created_at}}
-        {{recipe.recipe_id}}
-        {{recipe.recipe_name}}
-        {{recipe.recipe_description}}
-        {{recipe.ingredients_list}}
-        {{recipe.pic_url}}
-        {{recipe.category_id}}
-        {{recipe.user_created}}
-        {{recipe.recipe_deleted}}
+    <!--
+    {% for x in hello %}
+        
+        {{hello.created_at}}
+        {{hello.recipe_id}}
+        {{hello.recipe_name}}
+        {{hello.recipe_description}}
+        {{hello.ingredients_list}}
+        {{hello.pic_url}}
+        {{hello.category_id}}
+        {{hello.user_created}}
+        {{hello.recipe_deleted}}
+        
+    {% endfor %}
+    -->
+    <p> data should be here</p>
+    {% for category in categories %}
+    <p>{{category.category_name}}</p>
     {% endfor %}
     </body>
+
 </html>
-<!--
-    
-{% endblock %}
--->

@@ -11,12 +11,20 @@ mongo = PyMongo(app)
 
 
 @app.route('/')
+def hello():
+    return 'Hello World'
+
+@app.route('/home')
+def home():
+    categories=mongo.db.categories.find()
+
+    return render_template("home.html", categories=categories)
 
 @app.route('/recipe')
 def recipe():
-    data = mongo.db.recipes.find()
-    return render_template("recipe.html", page_title="Recipe", company=data)
 
+    return render_template("recipe.html", recipes=mongo.db.recipes.find())
+"""
 @app.route('/recipe/<dish>')
 def about_recipe(dish):
     recipe = {}
@@ -25,9 +33,10 @@ def about_recipe(dish):
         if obj["recipe_name"] == dish:
             recipe = obj
     return render_template("recipe.html", recipe=recipe)
-
+"""
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
+
