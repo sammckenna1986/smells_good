@@ -20,9 +20,24 @@ def home():
 
     return render_template("home.html", categories=categories)
 
+@app.route('/add_category')
+def add_category():
+    return render_template("add_category.html",
+    categories=mongo.db.categories.find())
+
+@app.route('/create_recipe')
+def create_recipe():
+    return render_template("create_recipe.html",
+    categories=mongo.db.categories.find(), recipes=mongo.db.categories.find())
+
+@app.route('/insert_recipe', methods=['POST'])
+def insert_recipe():
+    recipes = mongo.db.recipes
+    recipes.insert_one(request.form.to_dict())
+    return redirect(url_for('create_recipe'))
+
 @app.route('/recipe')
 def recipe():
-
     return render_template("recipe.html", recipes=mongo.db.recipes.find())
 """
 @app.route('/recipe/<dish>')

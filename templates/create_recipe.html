@@ -1,0 +1,42 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<form action="{{url_for('insert_recipe')}}" method="POST">
+  <div class="form-group">
+    <label for="recipe_name">Recipe Name</label>
+    <input value="{{recipes.recipe_name}}" name="recipe_name" type="text" class="form-control" id="recipe_name" placeholder="Recipe Name">
+  </div>
+  <br>
+      <div class="form-group">
+    <label for="category_select">Example multiple select</label>
+    <select multiple class="form-control" id="category_select" name="category_select">
+      {% for cat in categories %}
+        <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="recipe_description">Recipe Description</label>
+    {% if recipe_description %}
+    <input value="{{recipes.recipe_description}}" name="recipe_description" type="text" class="form-control" id="recipe_description" placeholder="Recipe Description">
+    {% endif %}
+  </div>
+   <br>
+    <div class="form-group">
+    <label for="ingredients_list">Ingredients List</label>
+     <input value="{{recipes.ingredients_list}}" name="ingredients_list" type="text" class="form-control" id="ingredients_list" placeholder="Ingredients List">
+  </div>
+   <br>
+  <div class="form-group">
+    <label for="cooking_steps">Cooking Steps</label>
+    <textarea value="{{recipes.cooking_steps}}" name="cooking_steps" type="text" class="form-control" rows="3" id="cooking_steps" placeholder="Cooking Steps"></textarea>
+  </div>
+   <br>
+    <div class="form-group">
+    <label for="picture_url">Insert picture url</label>
+    <input value="{{recipes.picture_url}}" name="picture_url" type="text" class="form-control" id="picture_url" placeholder="Insert picture url">
+  </div>
+  <button type="button submit" class="btn btn-primary btn-sm">Small button</button>
+</form>
+{% endblock %}
