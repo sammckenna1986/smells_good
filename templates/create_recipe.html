@@ -29,14 +29,19 @@
   </div>
    <br>
   <div class="form-group">
-    <label for="cooking_steps">Cooking Steps</label>
-    <textarea value="{{recipes.cooking_steps}}" name="cooking_steps" type="text" class="form-control" rows="3" id="cooking_steps" placeholder="Cooking Steps"></textarea>
+    <label for="cooking_instructions">Cooking Steps</label>
+    <textarea value="{{recipes.cooking_instructions}}" name="cooking_instructions" type="text" class="form-control" rows="3" id="cooking_instructions" placeholder="Cooking Instructions"></textarea>
   </div>
    <br>
     <div class="form-group">
     <label for="picture_url">Insert picture url</label>
     <input value="{{recipes.picture_url}}" name="picture_url" type="text" class="form-control" id="picture_url" placeholder="Insert picture url">
   </div>
+   <form method="POST" action action="/create" wnctype="multipart/form-data">
+            <input type="text" name="username">
+            <input type="file" name="recipe_image">
+            <input type="submit">
+    </form>       
   <button type="button submit" class="btn btn-primary btn-sm">Small button</button>
 </form>
 {% endblock %}
