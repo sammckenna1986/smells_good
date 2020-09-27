@@ -1,19 +1,27 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
+from dotenv import load_dotenv
+load_dotenv()
 from bson.objectid import ObjectId
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'smells_good'
-app.config["MONGO_URI"] = 'mongodb+srv://sam_mckenna:YnNPIkpu2VIdHiqT@cluster0.wptnw.mongodb.net/smells_good?retryWrites=true&w=majority'
+app.config["MONGO_URI"] = os.getenv("DBPASS")
 
 mongo = PyMongo(app)
+bcrypt = Bcrypt(app)
 
-
+# Index route and checking if logged in.
 @app.route('/')
-def hello():
-    return 'Hello World'
+def index():
+    if 'username' in session:
+        return 'You are logged in as ' + session['username']
 
+    return render_template('index.html')
+
+# Adding a category
 @app.route('/home')
 def home():
     categories=mongo.db.categories.find()
@@ -25,6 +33,8 @@ def add_category():
     return render_template("add_category.html",
     categories=mongo.db.categories.find())
 
+
+# creating a recipe
 @app.route('/create_recipe')
 def create_recipe():
     return render_template("create_recipe.html",
@@ -37,16 +47,42 @@ def insert_recipe():
     recipes.insert_one(request.form.to_dict())
     return redirect(url_for('create_recipe'))
 
+#creating an account
 @app.route('/create_account')
 def create_account():
     return render_template("create_account.html",
     users=mongo.db.users.find())
 
-@app.route('/signup', methods=['POST'])
+@app.route('/signup', methods=['POST', 'GET'])
 def signup():
+    if request.method == 'POST':
+        users = mongo.db.users
+        existing_user = users.find_one({'username' : request.form['username']})
+
+        if existing_user is None:
+            #hashpass = bcrypt.hashpw(request.form['password'], bcrypt.genSalt())
+            pw_hash = bcrypt.generate_password_hash(request.form['password'])
+            users.insert_one(request.form.to_dict())
+            session['username'] = request.form['username']
+            return redirect(url_for('create_recipe'))
+        
+        return 'That username already exists. Choose another username.'
+
+    return render_template('create_account.html')
+
+# logging into an account
+@app.route('/login', methods=['POST'])
+def login():
     users = mongo.db.users
-    users.insert_one(request.form.to_dict())
-    return redirect(url_for('create_recipe'))
+    login_user = users.find_one({'name' : request.form['username']})
+    
+    if login_user:
+        if bcrypt.hashpw(request.form['password'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
+        
+
+    return 'Invalid username/password combination'
 
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
@@ -58,31 +94,16 @@ def upload_image():
 @app.route('/file/<filename>')
 def file(filename):
     return mongo.send_file(filename)
-'''
-@app.route('/profile/<username>')
-def profile(username):
-    user = mongo.db.users.find_one_or_404({'username' : username})
-        return render_template("user.html", recipes=mongo.db.users.find())
-'''
-
 
 
 
 @app.route('/recipe')
 def recipe():
     return render_template("recipe.html", recipes=mongo.db.recipes.find())
-"""
-@app.route('/recipe/<dish>')
-def about_recipe(dish):
-    recipe = {}
-    data = mongo.db.recipes.find()
-    for obj in data:
-        if obj["recipe_name"] == dish:
-            recipe = obj
-    return render_template("recipe.html", recipe=recipe)
-"""
+
 
 if __name__ == '__main__':
+    app.secret_key = 'mysecret'
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
