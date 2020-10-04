@@ -18,9 +18,7 @@
   <br>
   <div class="form-group">
     <label for="recipe_description">Recipe Description</label>
-    {% if recipe_description %}
     <input value="{{recipes.recipe_description}}" name="recipe_description" type="text" class="form-control" id="recipe_description" placeholder="Recipe Description">
-    {% endif %}
   </div>
    <br>
     <div class="form-group">
@@ -37,11 +35,14 @@
     <label for="picture_url">Insert picture url</label>
     <input value="{{recipes.picture_url}}" name="picture_url" type="text" class="form-control" id="picture_url" placeholder="Insert picture url">
   </div>
-   <form method="POST" action action="/create" wnctype="multipart/form-data">
+ 
+  <button type="button submit" class="btn btn-primary btn-sm">Small button</button>
+</form>
+<!--
+  <form method="POST" action action="/create" wnctype="multipart/form-data">
             <input type="text" name="username">
             <input type="file" name="recipe_image">
             <input type="submit">
     </form>       
-  <button type="button submit" class="btn btn-primary btn-sm">Small button</button>
-</form>
+-->
 {% endblock %}

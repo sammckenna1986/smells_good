@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+    {% for recipe in recipe %}
+        <h2 class="col-md-7">{{ recipe.recipe_name }}</h2>
+        <p> {{ recipe.category_select }} </p>
+        <p> {{ recipe.recipe_description }} </p>
+        <p> {{ recipe.ingredients_list }} </p>
+        <p> {{ recipe.cooking_instructions }} </p>
+        <p> {{ recipe.picture_url }} </p>
+        <p> {{ recipe.username}} </p>
+    {% endfor %}
+{% endblock %}
+

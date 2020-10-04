@@ -1,0 +1,8 @@
+{% extends 'base.html' %} 
+{% block content %}
+        <h2 class="col-md-7">{{ recipe.recipe_name }}</h2>
+        <p> {{ recipe.recipe_description }} </p>
+        <p> {{ recipe.ingredients_list }} </p>
+        <p> {{ recipe.cooking_instructions}} </p>
+        <p> {{ recipe.pic_url }} </p>
+{% endblock %}
