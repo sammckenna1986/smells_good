@@ -66,7 +66,7 @@ def create_account():
 @app.route('/my_recipes')
 def my_recipes():
     #recipes=mongo.db.recipes.find_one({'username': session['username']})
-    return render_template("my_recipes.html", recipe = recipe)
+    return render_template("my_recipes.html", recipe=mongo.db.recipes.find({'username': session['username']}))
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
