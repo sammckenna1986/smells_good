@@ -1,10 +1,10 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<form>
+<form action="{{url_for('insert_category')}}" method="POST">
   <div class="form-group">
     <label for="category_name">New category name</label>
-    <input type="text" class="form-control" id="category_name" placeholder="Category Name">
+    <input type="text" class="form-control" name="category_name" id="category_name" placeholder="Category Name">
   </div>
   <input type="submit" value="Submit">
 </form>

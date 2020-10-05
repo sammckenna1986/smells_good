@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block content %}
+<h1> Edit Recipe </h1>
+<form action="{{ url_for('push_edit', recipe_id=recipe._id) }}" method="POST">
+  <div class="form-group">
+    <label for="recipe_name">Recipe Name</label>
+    <input value="{{recipe.recipe_name}}" name="recipe_name" type="text" class="form-control" id="recipe_name" placeholder="Recipe Name">
+  </div>
+  <br>
+      <div class="form-group">
+    <label for="category_select">Example multiple select</label>
+    <select multiple class="form-control" id="category_select" name="category_select">
+      {% for cat in categories %}
+        <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="recipe_description">Recipe Description</label>
+    <input value="{{recipe.recipe_description}}" name="recipe_description" type="text" class="form-control" id="recipe_description" placeholder="Recipe Description">
+  </div>
+   <br>
+    <div class="form-group">
+    <label for="ingredients_list">Ingredients List</label>
+     <input value="{{recipe.ingredients_list}}" name="ingredients_list" type="text" class="form-control" id="ingredients_list" placeholder="Ingredients List">
+  </div>
+   <br>
+  <div class="form-group">
+    <label for="cooking_instructions">Cooking Steps</label>
+    <textarea value="{{recipe.cooking_instructions}}" name="cooking_instructions" type="text" class="form-control" rows="3" id="cooking_instructions" placeholder="Cooking Instructions"></textarea>
+  </div>
+   <br>
+    <div class="form-group">
+    <label for="picture_url">Insert picture url</label>
+    <input value="{{recipe.picture_url}}" name="picture_url" type="text" class="form-control" id="picture_url" placeholder="Insert picture url">
+  </div>
+ 
+  <button type="button submit" name="edit_recipe" class="btn btn-primary btn-sm">Submit edited recipe</button>
+</form>
+<!--
+  <form method="POST" action action="/create" wnctype="multipart/form-data">
+            <input type="text" name="username">
+            <input type="file" name="recipe_image">
+            <input type="submit">
+    </form>       
+-->
+{% endblock %}

@@ -22,23 +22,26 @@ def index():
     return render_template('index.html')
 
 # Adding a category
-@app.route('/home')
-def home():
-    categories=mongo.db.categories.find()
-
-    return render_template("home.html", categories=categories)
-
 @app.route('/add_category')
 def add_category():
-    return render_template("add_category.html",
-    categories=mongo.db.categories.find())
+
+    return render_template("add_category.html", categories=mongo.db.categories)
+
+@app.route('/insert_category', methods=['POST'])
+def insert_category():
+    categories = mongo.db.categories
+    categories.insert({
+                'category_name': request.form['category_name'],
+                'username' : session.get("username")})
+                
+    return redirect(url_for('create_recipe'))
 
 
 # creating a recipe
 @app.route('/create_recipe')
 def create_recipe():
     return render_template("create_recipe.html",
-    categories=mongo.db.categories.find(), recipes=mongo.db.categories.find())
+    categories=mongo.db.categories.find(), recipes=mongo.db.recipes.find()) #check this later.
     
 
 
@@ -55,6 +58,27 @@ def insert_recipe():
                 'picture_url' : request.form['picture_url'],
                 'username' : session.get("username")})
     return redirect(url_for('create_recipe'))
+
+@app.route('/edit_recipe/<recipe_id>')
+def edit_recipe(recipe_id):
+    the_recipe  = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    categories = mongo.db.categories.find()
+    return render_template('edit_recipe.html', recipe=the_recipe, category_select=categories)
+
+@app.route('/push_edit/<recipe_id>', methods=["POST"])
+def push_edit(recipe_id):
+    recipes = mongo.db.recipes
+    recipes.update( {'_id': ObjectId(recipe_id)},
+    {
+            'recipe_name':request.form.get('recipe_name'),
+            'category_select': request.form.get('category_select'),
+            'recipe_description' : request.form.get('recipe_description'),
+            'ingredients_list' : request.form.get('ingredients_list'),
+            'cooking_instructions' : request.form.get('cooking_instructions'),
+            'picture_url' : request.form.get('picture_url'),
+            'username' : session.get("username")
+    })
+    return redirect(url_for('my_recipes'))
 
 #creating an account
 @app.route('/create_account')
@@ -120,24 +144,42 @@ def dinner():
 
     return render_template("dinner.html",recipes=mongo.db.recipes.find())
 
+@app.route('/lunch')
+def lunch():
+    recipe=mongo.db.recipes
 
-@app.route('/recipe/<unique_id>')
-def recipe(unique_id):
-    recipe=mongo.db.recipes.find_one({'_id':ObjectId(unique_id)})
+    return render_template("lunch.html",recipes=mongo.db.recipes.find())
 
-    return render_template("recipes.html",recipe = recipe)
+@app.route('/breakfast')
+def breakfast():
+    recipe=mongo.db.recipes
+
+    return render_template("breakfast.html",recipes=mongo.db.recipes.find())
+
+@app.route('/dessert')
+def dessert():
+    recipe=mongo.db.recipes
+
+    return render_template("dessert.html",recipes=mongo.db.recipes.find())
 
 @app.route('/recipes')
 def recipes():
-    #recipe =mongo.db.recipes.find()
-    recipe = mongo.db.users
-    return render_template("recipes.html",recipe = mongo.db.recipes.find())
+    recipe=mongo.db.recipes
+    
+    return render_template("recipes.html",recipes=mongo.db.recipes.find())
 
-@app.route('/account_details/<user_id>')
-def account_details(user_id):
-    detail=mongo.db.users.find_one({'_id':ObjectId(user_id)})
+@app.route('/recipe/<recipe_id>')
+def recipe(recipe_id):
+    recipe=mongo.db.recipes.find_one({'_id':ObjectId(recipe_id)})
 
-    return render_template("account_details.html",detail = detail)
+    return render_template("recipes.html",recipe = recipe)
+
+
+
+@app.route('/account_details')
+def account_details():
+
+    return render_template("account_details.html",detail = mongo.db.users.find({'username': session['username']}))
 
 
 if __name__ == '__main__':
