@@ -21,7 +21,8 @@ def index():
     users = mongo.db.users
     if request.method == 'POST':
         return render_template('index.html')
-    return render_template(url_for('login'), users=users)
+
+    return render_template("login_user.html",users=mongo.db.users.find())
 
 # creating an account
 @app.route('/create_account')
@@ -32,7 +33,7 @@ def create_account():
 # Posting a newly created account and making the sure that the username is not already taken.
 
 
-@app.route('/signup', methods=['POST', 'GET'])
+@app.route('/signup', methods=['POST'])
 
 def signup():
     if request.method == 'POST':
@@ -55,7 +56,7 @@ def signup():
     return render_template('create_account.html')
 
 # logging into an account
-@app.route('/login', methods=['POST'])
+@app.route('/login')
 def login():
     users = mongo.db.users
     login_user = users.find_one({'username' : request.form['username']})
