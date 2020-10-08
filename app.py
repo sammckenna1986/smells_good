@@ -17,12 +17,12 @@ mongo = PyMongo(app)
 # If there is already an available logged in session.
 
 @app.route('/')
-def index():
+def login_user():
     users = mongo.db.users
     if request.method == 'POST':
         return render_template('index.html')
 
-    return render_template("login_user.html",users=mongo.db.users.find())
+    return render_template("login_user.html", users=mongo.db.users.find())
 
 # creating an account
 @app.route('/create_account')
@@ -56,7 +56,7 @@ def signup():
     return render_template('create_account.html')
 
 # logging into an account
-@app.route('/login')
+@app.route('/login', methods=['POST'])
 def login():
     users = mongo.db.users
     login_user = users.find_one({'username' : request.form['username']})
@@ -68,6 +68,7 @@ def login():
             return redirect(url_for('my_recipes'))
 
         return 'NO'
+    return 'NO'
 
 @app.route('/account_details')
 def account_details():
@@ -102,7 +103,11 @@ def insert_category():
     return redirect(url_for('create_recipe'))
 
 # -------------------------THE RECIPE SECTION--------------------------
+
+
 # My Recipes page. The only place you can delete or edit recipes which means only the recipe owner can delete or edit based on username in session.
+
+
 @app.route('/my_recipes')
 def my_recipes():
     #recipes=mongo.db.recipes.find_one({'username': session['username']})
@@ -154,12 +159,12 @@ def push_edit(recipe_id):
     return redirect(url_for('my_recipes'))
 
 # Deleting a recipe details
-@app.route('/delete_recipe/<recipe_id>')
+@app.route('/delete_recipe/<recipe_id>', methods=['GET'])
 def delete_recipe(recipe_id):
     recipes = mongo.db.recipes
     if session['username'] == recipes.find({'username'}):
         mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
-        return redirect(url_for('my_recipes'))
+        return redirect(url_for('my_recipes'),recipe=the_recipe)
     return 'NOT your recipe'
 
 # Uploading the recipe image.
