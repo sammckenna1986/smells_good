@@ -1,0 +1,17 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<form action="{{url_for('/login')}}" method="POST">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input value="{{users.username}}" name="username" type="text" class="form-control" id="username" placeholder="Your Username">
+  </div>
+  <br>
+    <div class="form-group">
+  <label for="password">Password:</label>
+  <input value="{{users.password}}" type="password" id="password" name="password" class="form-control" placeholder="Password"
+  pattern=".{8,}" title="Eight or more characters">
+
+  <button type="button submit" class="btn btn-primary btn-sm">Login</button>
+</form>
+{% endblock %}

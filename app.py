@@ -5,28 +5,92 @@ from dotenv import load_dotenv
 load_dotenv()
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask_login import current_user, login_user, logout_user, login_required
 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'smells_good'
 app.config["MONGO_URI"] = os.getenv("DBPASS")
 
 mongo = PyMongo(app)
+# -------------------------THE ACCOUNT SECTION--------------------------
 
-# Index route and checking if logged in.
+# If there is already an available logged in session.
+
 @app.route('/')
 def index():
-    if 'username' in session:
-        return 'You are logged in as ' + session['username']
+    users = mongo.db.users
+    if request.method == 'POST':
+        return render_template('index.html')
+    return render_template(url_for('login'), users=users)
 
-    return render_template('index.html')
+# creating an account
+@app.route('/create_account')
+def create_account():
+    users = mongo.db.users
+    return render_template("create_account.html",users=mongo.db.users.find())
 
-# Adding a category
+# Posting a newly created account and making the sure that the username is not already taken.
+
+
+@app.route('/signup', methods=['POST', 'GET'])
+
+def signup():
+    if request.method == 'POST':
+        users = mongo.db.users
+        existing_user = users.find_one({'username' : request.form['username']})
+        # The password is hashed going in and out of mongodb so it is not at risk of being discovered.
+        if existing_user is None:
+            hashpass = generate_password_hash(request.form['password'],method='pbkdf2:sha256', salt_length=11)
+            users.insert({
+                'username': request.form['username'],
+                'password': hashpass,
+                'favourite_food': request.form['favourite_food'],
+                'favourite_cooking_utensil': request.form['favourite_cooking_utensil'],
+                'favourite_chef': request.form['favourite_chef']})
+            session['username'] = request.form['username']
+            return redirect(url_for('create_recipe'))
+        
+        return 'That username already exists. Choose another username.'
+
+    return render_template('create_account.html')
+
+# logging into an account
+@app.route('/login', methods=['POST'])
+def login():
+    users = mongo.db.users
+    login_user = users.find_one({'username' : request.form['username']})
+
+    if login_user:
+        # if check_password_hash(generate_password_hash(login_user['password'],method='pbkdf2:sha256', salt_length=11),request.form['password']):
+        if check_password_hash(login_user['password'],request.form['password']):
+            session['username'] = request.form['username']
+            return redirect(url_for('my_recipes'))
+
+        return 'NO'
+
+@app.route('/account_details')
+def account_details():
+
+    return render_template("account_details.html",detail = mongo.db.users.find({'username': session['username']}))
+
+
+# Logging out of the account.
+@app.route('/logout')
+def logout():
+    session.pop('token', None)
+    message = 'You were logged out' 
+    resp = app.make_response(render_template(create_recipe.html), message=message)
+    resp.set_cookie('token', expires=0)   
+    return 'it worked'
+
+
+# Adding a category template
 @app.route('/add_category')
 def add_category():
 
     return render_template("add_category.html", categories=mongo.db.categories)
 
+# Posting the category
 @app.route('/insert_category', methods=['POST'])
 def insert_category():
     categories = mongo.db.categories
@@ -36,16 +100,22 @@ def insert_category():
                 
     return redirect(url_for('create_recipe'))
 
+# -------------------------THE RECIPE SECTION--------------------------
+# My Recipes page. The only place you can delete or edit recipes which means only the recipe owner can delete or edit based on username in session.
+@app.route('/my_recipes')
+def my_recipes():
+    #recipes=mongo.db.recipes.find_one({'username': session['username']})
+    return render_template("my_recipes.html", recipe=mongo.db.recipes.find({'username': session['username']}))
 
-# creating a recipe
+
+# creating a recipe template
 @app.route('/create_recipe')
 def create_recipe():
     return render_template("create_recipe.html",
     categories=mongo.db.categories.find(), recipes=mongo.db.recipes.find()) #check this later.
     
 
-
-
+# Posting the recipe details
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipes = mongo.db.recipes
@@ -59,12 +129,14 @@ def insert_recipe():
                 'username' : session.get("username")})
     return redirect(url_for('create_recipe'))
 
+# Edit the recipe template
 @app.route('/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
     the_recipe  = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     categories = mongo.db.categories.find()
     return render_template('edit_recipe.html', recipe=the_recipe, category_select=categories)
 
+# Posting the edit details
 @app.route('/push_edit/<recipe_id>', methods=["POST"])
 def push_edit(recipe_id):
     recipes = mongo.db.recipes
@@ -80,53 +152,16 @@ def push_edit(recipe_id):
     })
     return redirect(url_for('my_recipes'))
 
-#creating an account
-@app.route('/create_account')
-def create_account():
-    return render_template("create_account.html",
-    users=mongo.db.users.find())
+# Deleting a recipe details
+@app.route('/delete_recipe/<recipe_id>')
+def delete_recipe(recipe_id):
+    recipes = mongo.db.recipes
+    if session['username'] == recipes.find({'username'}):
+        mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
+        return redirect(url_for('my_recipes'))
+    return 'NOT your recipe'
 
-#MY RECIPES PAGE ------------
-@app.route('/my_recipes')
-def my_recipes():
-    #recipes=mongo.db.recipes.find_one({'username': session['username']})
-    return render_template("my_recipes.html", recipe=mongo.db.recipes.find({'username': session['username']}))
-
-@app.route('/signup', methods=['POST', 'GET'])
-def signup():
-    if request.method == 'POST':
-        users = mongo.db.users
-        existing_user = users.find_one({'username' : request.form['username']})
-
-        if existing_user is None:
-            hashpass = generate_password_hash(request.form['password'],method='pbkdf2:sha256', salt_length=11)
-            users.insert({
-                'username' : request.form['username'],
-                'password': hashpass,
-                'favourite_food' : request.form['favourite_food'],
-                'favourite_cooking_utensil' : request.form['favourite_cooking_utensil'],
-                'favourite_chef' : request.form['favourite_chef']})
-            session['username'] = request.form['username']
-            return redirect(url_for('create_recipe'))
-        
-        return 'That username already exists. Choose another username.'
-
-    return render_template('create_account.html')
-
-# logging into an account
-@app.route('/login', methods=['POST'])
-def login():
-    users = mongo.db.users
-    login_user = users.find_one({'username' : request.form['username']})
-
-    if login_user:
-        #if check_password_hash(generate_password_hash(login_user['password'],method='pbkdf2:sha256', salt_length=11),request.form['password']):
-        if check_password_hash(login_user['password'],request.form['password']):
-            session['username'] = request.form['username']
-            return redirect(url_for('my_recipes'))
-
-        return 'NO'
-
+# Uploading the recipe image.
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
     if 'recipe_image' in request.files:
@@ -134,16 +169,14 @@ def upload_image():
         mongo.save_file(recipe_image.filename, recipe_image)
     return redirect(url_for('create_recipe'))
 
-@app.route('/file/<filename>')
-def file(filename):
-    return mongo.send_file(filename)
-
+# Dinner template
 @app.route('/dinner')
 def dinner():
     recipe=mongo.db.recipes
 
     return render_template("dinner.html",recipes=mongo.db.recipes.find())
 
+# Lunch template
 @app.route('/lunch')
 def lunch():
     recipe=mongo.db.recipes
@@ -162,12 +195,17 @@ def dessert():
 
     return render_template("dessert.html",recipes=mongo.db.recipes.find())
 
+
+# Recipes template -- MIGHT DELETE AS I HAVE THE OTHER THEMES
+
+
 @app.route('/recipes')
 def recipes():
     recipe=mongo.db.recipes
     
     return render_template("recipes.html",recipes=mongo.db.recipes.find())
 
+#The unique recipe.
 @app.route('/recipe/<recipe_id>')
 def recipe(recipe_id):
     recipe=mongo.db.recipes.find_one({'_id':ObjectId(recipe_id)})
@@ -175,16 +213,8 @@ def recipe(recipe_id):
     return render_template("recipes.html",recipe = recipe)
 
 
-
-@app.route('/account_details')
-def account_details():
-
-    return render_template("account_details.html",detail = mongo.db.users.find({'username': session['username']}))
-
-
 if __name__ == '__main__':
     app.secret_key = 'mysecret'
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=True)
-
+            debug=True) #MAKE SURE TO TURN OFF DEBUG
