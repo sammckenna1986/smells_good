@@ -1,10 +1,11 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<a href="{{url_for('create_account')}}" class="btn btn_small">Create Account</a>
+<br>
+<a href="{{url_for('create_account')}}" class="btn-sm btn-success padding">Create Account</a>
 <br>
 <form action="{{url_for('login')}}" method="POST">
-  <div class="form-group">
+  <div class="form-group padding">
     <label for="username">Username</label>
     <input value="{{users.username}}" name="username" type="text" class="form-control" id="username" placeholder="Your Username">
   </div>

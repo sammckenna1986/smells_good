@@ -16,13 +16,13 @@ mongo = PyMongo(app)
 # -------------------------THE ACCOUNT SECTION--------------------------
 
 # If there is already an available logged in session.
-
 @app.route('/')
-def login_user():
+def index():
     users = mongo.db.users
-    if request.method == 'POST':
-        return render_template('index.html', users=mongo.db.users.find())
+    return render_template('index.html', users=mongo.db.users.find())
 
+@app.route('/login_user')
+def login_user():
     return render_template("login_user.html", users=mongo.db.users.find())
 
 # creating an account

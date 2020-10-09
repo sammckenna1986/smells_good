@@ -1,6 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 {% for recipe in recipe %}
-        <h1>{{ recipe.recipe_name }}</h1>
+    <div class="card padding">
+        <div class="card-body padding">
+        <h1><u>{{ recipe.recipe_name }}</u></h1>
         <img src="{{ recipe.picture_url }}" class="img-fluid" alt="Responsive image">
         <p><b>The cook:</b> {{ recipe.username }}</p>
         <p><b>Category:</b> {{ recipe.category_select }}</p>
@@ -9,5 +11,7 @@
         <p>{{ recipe.ingredients_list }}</p>
         <p><b>Cooking Instructions</b></p>
         <p>{{ recipe.cooking_instructions }}</p>
+        </div>
+    </div>
     {% endfor %}
 {% endblock %}

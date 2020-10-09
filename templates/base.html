@@ -18,10 +18,7 @@
 </head>
 <body>
 
-
-<!--
-<img src="../static/branding/logo.png" alt="Smells Good Logo" style="width:311px;height:59px;">
--->
+<div class=".bg-light">
  <div class="centre padding margin">   
 <img src="../static/branding/logo.png" width="260" height="60"  alt="SmellsGood Logo" loading="lazy">
  </div>
@@ -46,7 +43,7 @@
     </div>
   </li>
     <li class="nav-item">
-    <a class="nav-link" href="/" tabindex="-1" aria-disabled="true">Login</a>
+    <a class="nav-link" href="/login_user" tabindex="-1" aria-disabled="true">Login</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="logout" tabindex="-1" aria-disabled="true">Logout</a>
@@ -58,6 +55,7 @@
         {% block content %} 
         {% endblock %}
     </div>
+</div>
 <footer>
 
     <!-- Bootstrap core JavaScript -->

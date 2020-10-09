@@ -2,16 +2,21 @@
 {% block content %}
 <h4>{{session.username}}'s Dishes</h4>
     {% for recipe in recipe %}
-        <h1>{{ recipe.recipe_name }}</h1>
-        <img src="{{ recipe.picture_url }}" class="img-fluid" alt="Responsive image">
-        <p><b>The cook:</b> {{ recipe.username }}</p>
-        <p><b>Category:</b> {{ recipe.category_select }}</p>
-        <p><b>Description:</b> {{ recipe.recipe_description }}</p>
-        <p><b>Ingredients</b></p>
-        <p>{{ recipe.ingredients_list }}</p>
-        <p><b>Cooking Instructions</b></p>
-        <p>{{ recipe.cooking_instructions }}</p>
-        <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" type="button" class="btn btn-light">Edit</a>
-        <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}" type="button" class="btn btn-light">Delete</a>
+    <div class="card padding">
+        <div class="card-body padding">
+            <h1>{{ recipe.recipe_name }}</h1>
+            <img src="{{ recipe.picture_url }}" class="img-fluid" alt="Responsive image">
+            <p><b>The cook:</b> {{ recipe.username }}</p>
+            <p><b>Category:</b> {{ recipe.category_select }}</p>
+            <p><b>Description:</b> {{ recipe.recipe_description }}</p>
+            <p><b>Ingredients</b></p>
+            <p>{{ recipe.ingredients_list }}</p>
+            <p><b>Cooking Instructions</b></p>
+            <p>{{ recipe.cooking_instructions }}</p>
+            <a id="whatsapp-button" href="whatsapp://send?text=" + window.location.pathname; data-action="share/whatsapp/share">Share via Whatsapp</a>
+            <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" type="button" class="btn btn-light">Edit</a>
+            <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}" type="button" class="btn btn-light">Delete</a>
+        </div>
+    </div>
     {% endfor %}
 {% endblock %}
