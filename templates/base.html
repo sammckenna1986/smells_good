@@ -25,27 +25,28 @@
  <div class="centre padding margin">   
 <img src="../static/branding/logo.png" width="260" height="60"  alt="SmellsGood Logo" loading="lazy">
  </div>
- <div>
- <h3>You are logged in as {{loggedin}}</h3>
- </div>
     <!-- Navigation -->
 <div class="justify-content-center">
 <ul class="nav nav-pills fixed">
   <li class="nav-item">
-    <a class="nav-link active" href="my_recipes.html">My Recipes</a>
+    <a class="nav-link active" href="my_recipes">My Recipes</a>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Great Food</a>
     <div class="dropdown-menu">
       
             <a class="dropdown-item" href="/create_recipe"><b>Add Recipe</b></a>
-            <a class="dropdown-item" href="/create_account"><b>Create New Account</b></a>
             <a class="dropdown-item" href="/breakfast">Breakfast</a>
             <a class="dropdown-item" href="/lunch">Lunch</a>
             <a class="dropdown-item" href="/dinner">Dinner</a> 
             <a class="dropdown-item" href="/dessert">Dessert</a> 
+            <a class="dropdown-item" href="/create_account"><b>Create New Account</b></a>
+            <a class="dropdown-item" href="/account_details"><b>Account Details</b></a>
       <div class="dropdown-divider"></div>
     </div>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="/" tabindex="-1" aria-disabled="true">Login</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="logout" tabindex="-1" aria-disabled="true">Logout</a>

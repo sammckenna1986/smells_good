@@ -1,15 +1,13 @@
 {% extends 'base.html' %} {% block content %}
-{% for recipe in recipes %}
-<div class="col-md-12">
-    <h1>{{ recipe.recipe_name }}</h1>
-    <img src="{{ recipe.picture_url }}">
-    <p>{{ recipe.username }}</p>
-    <p>{{ recipe.category_select }}</p>
-    <p>{{ recipe.recipe_description }}</p>
-    <p>{{ recipe.ingredients_list }}</p>
-    <p>{{ recipe.cooking_instructions }}</p>
-    <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" class="btn btn_small">Edit</a>
-    <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}" class="btn btn_small">Delete</a>
-</div>
-{% endfor %}
+{% for recipe in recipe %}
+        <h1>{{ recipe.recipe_name }}</h1>
+        <img src="{{ recipe.picture_url }}" class="img-fluid" alt="Responsive image">
+        <p><b>The cook:</b> {{ recipe.username }}</p>
+        <p><b>Category:</b> {{ recipe.category_select }}</p>
+        <p><b>Description:</b> {{ recipe.recipe_description }}</p>
+        <p><b>Ingredients</b></p>
+        <p>{{ recipe.ingredients_list }}</p>
+        <p><b>Cooking Instructions</b></p>
+        <p>{{ recipe.cooking_instructions }}</p>
+    {% endfor %}
 {% endblock %}

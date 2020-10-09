@@ -1,10 +1,10 @@
 {% extends 'base.html' %} 
 {% block content %}
     {% for detail in detail %}
-        <h2 class="col-md-7">{{ detail.username }}</h2>
-        <p> {{ detail.favourite_food }} </p>
-        <p> {{ detail.favourite_cooking_utensil }} </p>
-        <p> {{ detail.favourite_chef }} </p>
-        <p> {{ detail.pic_url }} </p>
+        <h2 class="col-md-7"><b>The cook:</b> {{ detail.username }}</h2>
+        <p><b>Favourite food:</b>  {{ detail.favourite_food }} </p>
+        <p><b>Favourite cooking utensil: </b>  {{ detail.favourite_cooking_utensil }} </p>
+        <p><b>Favourite chef: </b>  {{ detail.favourite_chef }} </p>
+        <a href="{{url_for('delete_user', user_id=detail._id)}}" type="button" class="btn btn-warning">Delete Account</a>
     {% endfor %}
 {% endblock %}

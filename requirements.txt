@@ -1,6 +1,7 @@
 bcrypt==3.2.0
 click==7.1.2
 dnspython==2.0.0
+flash==1.0.3
 Flask==1.1.2
 Flask-Bcrypt==0.7.1
 Flask-Login==0.5.0
@@ -8,4 +9,6 @@ Flask-PyMongo==2.3.0
 itsdangerous==1.1.0
 pymongo==3.11.0
 python-dotenv==0.14.0
+selenium==3.141.0
+splinter==0.14.0
 Werkzeug==1.0.1

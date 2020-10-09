@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for, session
+from flask import Flask, render_template, redirect, request, url_for, session, flash
 from flask_pymongo import PyMongo
 from dotenv import load_dotenv
 load_dotenv()
@@ -12,6 +12,7 @@ app.config["MONGO_DBNAME"] = 'smells_good'
 app.config["MONGO_URI"] = os.getenv("DBPASS")
 
 mongo = PyMongo(app)
+
 # -------------------------THE ACCOUNT SECTION--------------------------
 
 # If there is already an available logged in session.
@@ -20,7 +21,7 @@ mongo = PyMongo(app)
 def login_user():
     users = mongo.db.users
     if request.method == 'POST':
-        return render_template('index.html')
+        return render_template('index.html', users=mongo.db.users.find())
 
     return render_template("login_user.html", users=mongo.db.users.find())
 
@@ -47,7 +48,8 @@ def signup():
                 'password': hashpass,
                 'favourite_food': request.form['favourite_food'],
                 'favourite_cooking_utensil': request.form['favourite_cooking_utensil'],
-                'favourite_chef': request.form['favourite_chef']})
+                'favourite_chef': request.form['favourite_chef']
+            })
             session['username'] = request.form['username']
             return redirect(url_for('create_recipe'))
         
@@ -66,27 +68,30 @@ def login():
         if check_password_hash(login_user['password'],request.form['password']):
             session['username'] = request.form['username']
             return redirect(url_for('my_recipes'))
-
-        return 'NO'
-    return 'NO'
+        flash('Try again')
+        return render_template("login_user.html", users=mongo.db.users.find())
+    flash('Try again')
+    return render_template("login_user.html", users=mongo.db.users.find())
 
 @app.route('/account_details')
 def account_details():
-
     return render_template("account_details.html",detail = mongo.db.users.find({'username': session['username']}))
 
-
+# Deleting account details
+@app.route('/delete_user/<user_id>', methods=['GET'])
+def delete_user(user_id):
+    users = mongo.db.users
+    mongo.db.users.remove({'_id': ObjectId(user_id)}) 
+    return redirect(url_for('create_account'))
 # Logging out of the account.
+ 
 @app.route('/logout')
 def logout():
-    session.pop('token', None)
-    message = 'You were logged out' 
-    resp = app.make_response(render_template(create_recipe.html), message=message)
-    resp.set_cookie('token', expires=0)   
-    return 'it worked'
+    session.clear()
+    return render_template("login_user.html", users=mongo.db.users.find())
 
 
-# Adding a category template
+# Adding a category template, just to make it easier for the admin to add categories
 @app.route('/add_category')
 def add_category():
 
@@ -110,30 +115,39 @@ def insert_category():
 
 @app.route('/my_recipes')
 def my_recipes():
-    #recipes=mongo.db.recipes.find_one({'username': session['username']})
-    return render_template("my_recipes.html", recipe=mongo.db.recipes.find({'username': session['username']}))
+    
+    try:    
+        return render_template("my_recipes.html", recipe=mongo.db.recipes.find({'username': session['username']}))
+    except:
+        return render_template("login_user.html", users=mongo.db.users.find())
 
 
 # creating a recipe template
 @app.route('/create_recipe')
 def create_recipe():
-    return render_template("create_recipe.html",
-    categories=mongo.db.categories.find(), recipes=mongo.db.recipes.find()) #check this later.
-    
+    return render_template("create_recipe.html",categories=mongo.db.categories.find(), recipes=mongo.db.recipes.find())
 
 # Posting the recipe details
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
-    recipes = mongo.db.recipes
-    recipes.insert({
-                'recipe_name' : request.form['recipe_name'],
-                'category_select': request.form['category_select'],
-                'recipe_description' : request.form['recipe_description'],
-                'ingredients_list' : request.form['ingredients_list'],
-                'cooking_instructions' : request.form['cooking_instructions'],
-                'picture_url' : request.form['picture_url'],
-                'username' : session.get("username")})
-    return redirect(url_for('create_recipe'))
+    try:
+        recipes = mongo.db.recipes
+        users = mongo.db.recipes
+        categories = mongo.db.categories
+        recipes.insert({
+                    'recipe_name' : request.form['recipe_name'],
+                    'category_select': request.form['category_select'],
+                    'recipe_description' : request.form['recipe_description'],
+                    'ingredients_list' : request.form['ingredients_list'],
+                    'cooking_instructions' : request.form['cooking_instructions'],
+                    'picture_url' : request.form['picture_url'],
+                    'username' : session.get("username")
+                    })
+        return redirect(url_for('create_recipe'))
+    except:
+        return ('Please make sure you choose a category. Go back and add a category.')
+        
+        
 
 # Edit the recipe template
 @app.route('/edit_recipe/<recipe_id>')
@@ -162,44 +176,33 @@ def push_edit(recipe_id):
 @app.route('/delete_recipe/<recipe_id>', methods=['GET'])
 def delete_recipe(recipe_id):
     recipes = mongo.db.recipes
-    if session['username'] == recipes.find({'username'}):
-        mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
-        return redirect(url_for('my_recipes'),recipe=the_recipe)
-    return 'NOT your recipe'
-
-# Uploading the recipe image.
-@app.route('/upload_image', methods=['POST'])
-def upload_image():
-    if 'recipe_image' in request.files:
-        recipe_image = request.files['recipe_image']
-        mongo.save_file(recipe_image.filename, recipe_image)
-    return redirect(url_for('create_recipe'))
+    mongo.db.recipes.remove({'_id': ObjectId(recipe_id)}) 
+    return redirect(url_for('my_recipes'))
 
 # Dinner template
 @app.route('/dinner')
 def dinner():
     recipe=mongo.db.recipes
-
-    return render_template("dinner.html",recipes=mongo.db.recipes.find())
+    return render_template("dinner.html",recipe=mongo.db.recipes.find({'category_select':'Dinner'}))
 
 # Lunch template
 @app.route('/lunch')
 def lunch():
     recipe=mongo.db.recipes
 
-    return render_template("lunch.html",recipes=mongo.db.recipes.find())
+    return render_template("lunch.html",recipes=mongo.db.recipes.find({'category_select':'Lunch'}))
 
 @app.route('/breakfast')
 def breakfast():
     recipe=mongo.db.recipes
 
-    return render_template("breakfast.html",recipes=mongo.db.recipes.find())
+    return render_template("breakfast.html",recipes=mongo.db.recipes.find({'category_select':'Breakfast'}))
 
 @app.route('/dessert')
 def dessert():
     recipe=mongo.db.recipes
 
-    return render_template("dessert.html",recipes=mongo.db.recipes.find())
+    return render_template("dessert.html",recipes=mongo.db.recipes.find({'category_select':'Dessert'}))
 
 
 # Recipes template -- MIGHT DELETE AS I HAVE THE OTHER THEMES
