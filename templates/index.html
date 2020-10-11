@@ -1,25 +1,36 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active" data-interval="1000">
-      <img src="../static/assets/images/restaurant.jpg" class="d-block w-100 img-fluid" alt="restaurant">
-    </div>
-    <div class="carousel-item" data-interval="1000">
-      <img src="/..static/assets/images/woman.jpg" class="d-block w-100 img-fluid" alt="woman and man cooking">
-    </div>
-    <div class="carousel-item" data-interval="1000">
-      <img src="../static/assets/images/italian.jpg" class="d-block w-100 img-fluid" alt="spices">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
+        <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Join our community!</h1>
+            <p class="lead"><b>Smells Good</b> brings a community of food enthusiasts together to share their favourite recipes.</p>
+        </div>
+        </div>
+
+        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item" data-interval="7000">
+            <h1><a href="dinner" class="links">Check out our latest dinner dishes!</a></h1>
+            <img src="../static/assets/images/italian.jpg" class="d-block w-100" alt="Dinner">
+            </div>
+            <div class="carousel-item active" data-interval="5000">
+            <h1><a href="breakfast" class="links">Delicious breakfasts</a></h1>
+            <img src="../static/assets/images/restaurant.jpg" class="d-block w-100" alt="restaurant">
+            </div>
+            <div class="carousel-item" data-interval="5000">
+            <h1>Cook of the month: Jeremy and Diane</h1>
+            <img src="../static/assets/images/woman.jpg" class="d-block w-100" alt="woman and man cooking">
+            </div>
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        </div>
 {% endblock %}

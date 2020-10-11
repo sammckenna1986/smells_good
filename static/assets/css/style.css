@@ -25,6 +25,7 @@ margin-left: 10px;
 margin-right:10px;
 }
 
-
-
+.jumbotron, .container, .jumbotron-fluid {
+    background-color: white;
+}
 font-family: 'PT Sans', sans-serif;
