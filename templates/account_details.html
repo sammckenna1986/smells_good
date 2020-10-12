@@ -5,6 +5,6 @@
         <p><b>Favourite food:</b>  {{ detail.favourite_food }} </p>
         <p><b>Favourite cooking utensil: </b>  {{ detail.favourite_cooking_utensil }} </p>
         <p><b>Favourite chef: </b>  {{ detail.favourite_chef }} </p>
-        <a href="{{url_for('delete_user', user_id=detail._id)}}" type="button" class="btn btn-warning">Delete Account</a>
+        <a href="{{url_for('delete_user', user_id=detail._id)}}" type="button" class="btn btn-danger">Delete Account</a>
     {% endfor %}
 {% endblock %}

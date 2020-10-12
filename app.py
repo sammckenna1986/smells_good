@@ -1,11 +1,10 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for, session, flash
+from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from dotenv import load_dotenv
 load_dotenv()
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import current_user, login_user, logout_user, login_required
 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'smells_good'
@@ -14,7 +13,6 @@ app.config["MONGO_URI"] = os.getenv("DBPASS")
 mongo = PyMongo(app)
 
 # -------------------------THE ACCOUNT SECTION--------------------------
-
 # If there is already an available logged in session.
 @app.route('/')
 def index():
@@ -52,9 +50,7 @@ def signup():
             })
             session['username'] = request.form['username']
             return redirect(url_for('create_recipe'))
-        
         return 'That username already exists. Choose another username.'
-
     return render_template('create_account.html')
 
 # logging into an account
@@ -64,18 +60,19 @@ def login():
     login_user = users.find_one({'username' : request.form['username']})
 
     if login_user:
-        # if check_password_hash(generate_password_hash(login_user['password'],method='pbkdf2:sha256', salt_length=11),request.form['password']):
         if check_password_hash(login_user['password'],request.form['password']):
             session['username'] = request.form['username']
             return redirect(url_for('my_recipes'))
         flash('Try again')
         return render_template("login_user.html", users=mongo.db.users.find())
-    flash('Try again')
     return render_template("login_user.html", users=mongo.db.users.find())
 
 @app.route('/account_details')
 def account_details():
-    return render_template("account_details.html",detail = mongo.db.users.find({'username': session['username']}))
+    try:
+        return render_template("account_details.html",detail = mongo.db.users.find({'username': session['username']}))
+    except:
+        return render_template("login_user.html", users=mongo.db.users.find())
 
 # Deleting account details
 @app.route('/delete_user/<user_id>', methods=['GET'])
@@ -97,14 +94,13 @@ def add_category():
 
     return render_template("add_category.html", categories=mongo.db.categories)
 
-# Posting the category
+# Posting the category; I do not have a link on the website for this this is for ease of use for admins; So it is hidden for adding caetgories.
 @app.route('/insert_category', methods=['POST'])
 def insert_category():
     categories = mongo.db.categories
     categories.insert({
                 'category_name': request.form['category_name'],
                 'username' : session.get("username")})
-                
     return redirect(url_for('create_recipe'))
 
 # -------------------------THE RECIPE SECTION--------------------------
@@ -112,10 +108,8 @@ def insert_category():
 
 # My Recipes page. The only place you can delete or edit recipes which means only the recipe owner can delete or edit based on username in session.
 
-
 @app.route('/my_recipes')
 def my_recipes():
-    
     try:    
         return render_template("my_recipes.html", recipe=mongo.db.recipes.find({'username': session['username']}))
     except:
@@ -145,9 +139,7 @@ def insert_recipe():
                     })
         return redirect(url_for('create_recipe'))
     except:
-        return ('Please make sure you choose a category. Go back and add a category.')
-        
-        
+        return ('Please make sure you choose a category. Go back and add a category.') #This is so all of the information that they type in is not lost.
 
 # Edit the recipe template
 @app.route('/edit_recipe/<recipe_id>')
@@ -160,6 +152,7 @@ def edit_recipe(recipe_id):
 @app.route('/push_edit/<recipe_id>', methods=["POST"])
 def push_edit(recipe_id):
     recipes = mongo.db.recipes
+    categories = mongo.db.categories
     recipes.update( {'_id': ObjectId(recipe_id)},
     {
             'recipe_name':request.form.get('recipe_name'),
@@ -204,21 +197,10 @@ def dessert():
 
     return render_template("dessert.html",recipes=mongo.db.recipes.find({'category_select':'Dessert'}))
 
-
-# Recipes template -- MIGHT DELETE AS I HAVE THE OTHER THEMES
-
-
-@app.route('/recipes')
-def recipes():
-    recipe=mongo.db.recipes
-    
-    return render_template("recipes.html",recipes=mongo.db.recipes.find())
-
 #The unique recipe.
 @app.route('/recipe/<recipe_id>')
 def recipe(recipe_id):
     recipe=mongo.db.recipes.find_one({'_id':ObjectId(recipe_id)})
-
     return render_template("recipes.html",recipe = recipe)
 
 

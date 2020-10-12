@@ -24,8 +24,16 @@ padding-bottom: 10px;
 margin-left: 10px;
 margin-right:10px;
 }
+/*homepage - index.html*/
+.jumbotron, .jumbotron-fluid {
+    background-color: #007fff;
+}
 
-.jumbotron, .container, .jumbotron-fluid {
-    background-color: white;
+.links {
+    color:black;
+}
+
+.lead , .display-4{
+    color:white;
 }
 font-family: 'PT Sans', sans-serif;

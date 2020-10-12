@@ -1,39 +1,253 @@
-<img src="https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png" style="margin: 0;">
+<img src="../static/branding/logo.png" >
 
-Welcome sammckenna1986,
+# Smells Good
+<b>Problem Statement</b><br>
+If you look at any other recipe sharing websites they are always really busy and their are always elements getting in the way of
+actually seeing the instructional steps in the recipe or the ingredients.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project.
+<br>
+<b>Proposed Solution</b><br>
+<i>Smells Good</i> is a website for sharing your favourite websites, when you log in all of your recipes are saved in one place, but you still get to see what recipes
+other community members are posting that inspire you. The website is very clean and easily viewable on any device that you might have with you while you are cooking your favourite dish.
 
-## Gitpod Reminders
+## UX
+<b>The Smells Good design concept</b> is that it might look like the facebook of food where people can look at each other's recipes and have their own recipe location as well. 
+The design is really clean and very functional and does not distract the user from the actual recipe instructions or ingredients which a lot of recipe websites do.<br>
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+The idea behind the simplicity is that it is easy to cook, that it is simple to read, and that there is nothing that is distracting about the website visually; Suggesting good, simple, clean food.
 
-`python3 -m http.server`
+<b>The user experience for the website</b> The user might have gotten attracted to the website by one of the recipes but they might be enticed to create and account, and interact with the website more
+as it is so cleanly designed that it is useful to keep their own recipes on it, and to refer back to it. The website is simply structured into the simplest types of meal categories: breakfast, lunch, dinner, dessert; This means when a user arrives to the website
+they know exactly where to go for what overarching food scenario they are trying to find a recipe for. 
 
-A blue button should appear to click: *Make Public*,
+<b>User Story 1: Be Inspired</b><br>
+- A new user comes across the <b>Smells Good</b> website and is inspired by the simplicity of the design, the ease of which they can see the information, and high-resolution pictures of the food and chooses a recipe for the occasion that they want to cook for.
 
-Another blue button should appear to click: *Open Browser*.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+<img src="assets/images/md/index_phone.png" style="height:20%;width:20%;margin-left:33%;">
+<img src="assets/images/md/berlin_phone.png" style="height:20%;width:20%;margin-left:33%;">
+<img src="assets/images/md/city_page_phone.png" style="height:20%;width:20%;margin-left:33%;">
 
-A blue button should appear to click: *Make Public*,
 
-Another blue button should appear to click: *Open Browser*.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the backend lessons.
+<b>User Story 2: Selecting a Recipe by Category</b><br>
+- The user is able to go to the website and choose a simple recipe category that interests them and chooses the correct recipe for the occasion at speed.  
 
-## Updates Since The Instructional Video
+<img src="assets/images/md/searchbar_phone.png" style="height:20%;width:20%;margin-left:33%;">
+<img src="assets/images/md/hotels_phone.png" style="height:20%;width:20%;margin-left:33%;">
 
-We continually tweak and adjust this template to help give you the best experience. Here are the updates since the original video was made:
+<b>User Story 3: The user creates an account with Smells Good</b><br>
+- After the user has visited the website a few times and is really enjoying the whitespace and the ease of being able to see the recipe information, they decide to create an account with Smells Good. 
+They are really happy that Smells Good has made the sensible choice and is hashing all of the passwords and is not asking for their email address on login which makes the site a closed circuit and protects the users data and identity.
+<br><br>
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+<b>User Story 4: The user creates recipes and manages their 'my recipes' section of the website</b><br>
+- The user creates an account and is also asked to state their favourite chef, favourite cooking-utensil and favourite food.
+<br><br>
+Once they have created an account they are able to visit their own recipes, that they created, in their 'my recipes' section. They are able to manage this 
+part of the website to fit their needs by editing recipes as their recipes develop and improve over time,
+and they also can delete the recipes that they are no longer interested in.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+<img src="assets/images/md/request_phone.png" alt="skyscanner" style="height:20%;width:20%;margin-left:33%;">
+<img src="assets/images/md/skyscanner_phone.png" alt="skyscanner" style="height:20%;width:20%;margin-left:33%;">
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+## Features
+1) <b>Food Categories</b><br><br> 
+A user is quickly and easily able to navigate to the food category that they want to find the recipe in: breakfast, lunch, dinner , and dessert. It is that simple.
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+2) <b>Create an Account Safely</b><br><br> 
+A user is able to create an account with a hashed password system and they do not need to user their email address which keeps their identity extremely safe.
 
---------
 
-Happy coding!
+3) <b>My Recipes (Edit and Delete) </b><br><br> 
+Users are able to manage their own 'my recipes' section of the website where they can edit their existing recipes and also delete the recipes that they are not interested in any longer.
+
+3) <b>Sharing the page link on Facebook </b><br><br> 
+Users are able to share the recipe page that they are on onto their Facebook page.
+
+## Future Feature Ideas
+1) I really enjoyed thinking-up a contrarian cooking-recipes website because if you look at some of the actual cooking recipes websites, they are so bad actually being functional and the information is really hard to find.
+I would love to have a focus group with a lot of people that use these websites and really figure out what they hate about them as most of them seem half a decade behind most modern websites in terms of clean design.
+
+2) Create a shopping list part of the website that just grabs the ingredients from the selected recipe and then populates another part of the website.
+
+3) It would be nice to create a rating of recipes system between the user.
+
+4) Build comments section under the recipes that is hideable so it does not distract from the cleanness of the pages so people can still use it easily for cooking instructions and ingredients.
+
+## Technologies Used
+
+- [Bootstrap](https://getbootstrap.com/)
+    - The project uses **Bootstrap** to speed up the HTML and CSS work.
+
+- [Google Fonts](https://fonts.google.com/)
+        - I used archivo as this website is a little bit like an archive of recipes. It looks very strong and clean as well as a font.
+
+- [Python](https://docs.python.org/3/)
+
+- [Flask] (https://flask.palletsprojects.com/en/1.1.x/)
+- [Jinja] (https://jinja.palletsprojects.com/en/2.10.x/templates/)
+        - Both Flask and Jinja were used to create the templating around the recipes populating to the website. 
+
+- [CSS](https://cssreference.io/)
+
+- [MongoDb] (https://www.mongodb.com/)
+        - MongoDb was used for managing the databases of users, categories and recipes.
+
+- [Werkzeug.Security] (https://werkzeug.palletsprojects.com/en/1.0.x/utils/)
+        - I used this for hashing the user passwords and also the hashcomparison for retrieving the passwords.
+    
+- [bson.objectid] (https://docs.mongodb.com/manual/reference/method/ObjectId/)
+        - This was used for pointing at the particular recipes or users within the database.   
+
+- [dotenv] (https://pypi.org/project/python-dotenv/)
+        - For protecting the secret keys.
+
+- [flask_pymongo](https://flask-pymongo.readthedocs.io/en/latest/)
+        - To be able to interact with mongodb easily.
+
+
+## Testing
+<b>Testing Summary</b><br>
+
+
+1. <b>User Story 1 & 2:</b> Be inspired and browse the recipe categories.
+    1. Try to read all of the text on the index page and make sure that the text looks strong. - Success
+    2. The image loads. - Success
+    3. Try the 'My Recipes' button and it leads to both the 'My Recipes' section, as well as to the login/account creation part of the website. - Success
+    4. Try the 'Great Food' - dropdown menu and try the 'Add Recipe', 'Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Create New Account'  and 'Account details' buttons. The correct information is populated to the page. - Success
+    5. Try the login button. - Success
+    6. Try the logout button. - Success
+    7. Check the index.html page in responsinator(https://www.responsinator.com/?url=https%3A%2F%2Fsammckenna1986.github.io%2FBeenThere-GoogleMapsApi%2F)
+        - Success
+
+2. <b>User Story 3:</b> Create a new account.
+    1. All of the form is present. - Success
+    2. The create account 'submit button' is operational. - Success
+    3. The data is added to mongodb. - Success
+    4. The logged in user is able to go to the 'account details' page and their information is populated. - Success 
+    5. On the 'account details' page the user is able to press the 'delete account' button and the user is removed from the mongodb collection. - Success
+
+
+1. <b>User Story 4:</b> The user creates recipes and manages their 'my recipes' section of the website.
+    1. The recipes that the user created appear correctly on the page. - Success
+    2. The recipes that the user created appear correctly on the page. - Success
+    12. Check the page in [responsinator](https://www.responsinator.com/?url=https%3A%2F%2Fsammckenna1986.github.io%2FBeenThere-GoogleMapsApi%2Fibiza.html) - Success
+
+1. d) <b>User Story 1:</b> Berlin - city page.
+    1. Try to read all of the text on the page and make sure that the text looks strong. - Success
+    2. The image of Berlin and of Sandra load. - Success
+    3. Customised map loads. - Success
+    4. All three markers load on the map and the map is centred on the markers. - Success
+    5. All three event listeners for clicking on the markers are working. - Success
+    6. All three markers have working pop-up windows that include the customised text and images. - Success
+    7. The 'Book Your Trip' button is present and it is working correctly. - Success
+    8. The city buttons underneath the logo are all present and are working correctly. - Success
+    9. The hyperlink within the logo is correctly working and brings people back to the index.html page. - Success
+    10. The social media, font awesome items are present and the hyperlinks are working. - Success
+    11. Check the page in [responsinator](https://www.responsinator.com/?url=https%3A%2F%2Fsammckenna1986.github.io%2FBeenThere-GoogleMapsApi%2Fberlin.html) - Success
+
+1. e) <b>User Story 1:</b> London - city page.
+    1. Try to read all of the text on the page and make sure that the text looks strong. - Success
+    2. The image of London and of Mildred load. - Success
+    3. Customised map loads. - Success
+    4. All three markers load on the map and the map is centred on the markers. - Success
+    5. All three event listeners for clicking on the markers are working. - Success
+    6. All three markers have working pop-up windows that include the customised text and images. - Success
+    7. The 'Book Your Trip' button is present and it is working correctly. - Success
+    8. The city buttons underneath the logo are all present and are working correctly. - Success
+    9. The hyperlink within the logo is correctly working and brings people back to the index.html page. - Success
+    10. The social media, font awesome items are present and the hyperlinks are working. - Success
+    11. Check the page in [responsinator](https://www.responsinator.com/?url=https%3A%2F%2Fsammckenna1986.github.io%2FBeenThere-GoogleMapsApi%2Flondon.html) - Success
+
+1. e) <b>User Story 1:</b> Paris - city page.
+    1. Try to read all of the text on the page and make sure that the text looks strong. - Success
+    2. The image of Paris and of Amelie load. - Success
+    3. Customised map loads. - Success
+    4. All three markers load on the map and the map is centred on the markers. - Success
+    5. All three event listeners for clicking on the markers are working. - Success
+    6. All three markers have working pop-up windows that include the customised text and images. - Success
+    7. The 'Book Your Trip' button is present and it is working correctly. - Success
+    8. The city buttons underneath the logo are all present and are working correctly. - Success
+    9. The hyperlink within the logo is correctly working and brings people back to the index.html page. - Success
+    10. The social media, font awesome items are present and the hyperlinks are working. - Success
+    11. Check the page in [responsinator](https://www.responsinator.com/?url=https%3A%2F%2Fsammckenna1986.github.io%2FBeenThere-GoogleMapsApi%2Fparis.html) - Success
+
+1. f) <b>User Story 1:</b> booking.html page.
+    1. Try to read all of the text on the page and make sure that the text looks strong. - Success
+    2. The large success image loads. - Success
+    3. All form elements loaded correctly including placeholders. - Success
+    4. The 'which city?' dropdown menu works. - Success
+    5. The 'submit request for ideal holiday' button is present and working. - Success
+    5. The event listener changes the 'submit request for ideal holiday' button content to 'thank you' on click. - Success
+    9. The hyperlink within the logo is correctly working and brings people back to the index.html page. - Success
+    10. The social media, font awesome items are present and the hyperlinks are working. - Success
+    11. Check the page in [responsinator](https://www.responsinator.com/?url=https%3A%2F%2Fsammckenna1986.github.io%2FBeenThere-GoogleMapsApi%2Fbook.html)
+ - Success
+    
+2. <b>User Story 2:</b> User Story 2: Checking which cities are in focus this month and just using the hotel finder.
+    1. Try the 'Search for Hotels' button and see if it displays the map and the search bar. - Success
+    2. Try entering a city into the search bar and see if the map responds. - Success
+    3. Check if the buttons for showing and hiding the hotel list are present and are working. - Success
+    4. Try the 'Hide Search Table' button and see if the hotel list becomes invisible.  - Success
+    5. Try moving the map around with hand cursor. - Success
+        - Found Social Media buttons floating in the map. I don't want the user going to social media when they are searching for hotels so I just added an event listener to make the social media buttons disappear when the hotels button is pressed. 
+    6. 'Book Your Trip' button is present and works. - Success 
+    7. The hyperlink within the logo is correctly working and brings people back to the index.html page. - Success
+    8. Responsinator test carried out at the same time when I tested index.html in user story 1. - Success
+
+
+3. <b>User Story 3:</b> Booking flight post trip planning. (location: post_booking.html)
+    1. Check all the written content for accuracy. - Success
+    2. Try 'return', 'one way' and 'multi-city' radio buttons. - Success
+    3. Try 'from', 'to' and 'depart' and 'return' fields.  - Success
+    4. Check 'cabin class' drop down menu. - Success
+    5. Test 'adults' and 'children' plus and minus buttons.- Success
+    6. Try the 'search flights' button. - Success 
+    7. Check the page in [responsinator](https://www.responsinator.com/?url=https%3A%2F%2Fsammckenna1986.github.io%2FBeenThere-GoogleMapsApi%2Fpost_booking.html)
+ - Success
+
+## Deployment
+- I deployed the website on [github pages](https://sammckenna1986.github.io/BeenThere-GoogleMapsApi/index.html)
+    1. Made sure that my github repository was up to date by 'git push' command in terminal.
+    2. Went to settings of that particular gihub repository.
+    3. Navigated to the github pages part of the settings and published the master branch.
+    4. Refreshed the page and then tried the blue hyperlink where the website was published at to make sure that it works.
+    5. Then I tested the deployment in responsinator to make sure that it looks good on all devices and that it is truly, phone-first, responsive.
+    
+## Credits
+- Thank you to Antonio Rodriguez, my mentor, who's three meetings on this project were excellent and helped me understand a few concepts that I was missing.
+- Thank you to Claire Lally for clarifying a few concepts on the phone and for providing some extra motivation.
+- Thank you to all the teachers on the course; The videos and excercises were excellent.
+
+### Content and Media
+- The blurbs for the cutomised google maps markers I got from the places' own websites.
+- The social media icons were from fontawesome.
+- All the pictures were copyright free and were downloaded from https://pixabay.com/.
+- The bean logo image I got from google images.
+
+
+### Acknowledgements
+
+I received a lot of inspiration and instruction from the following links:
+- https://developers.google.com/maps/documentation/javascript/cloud-based-map-styling
+- https://stackoverflow.com/questions/40064293/add-second-marker-on-google-maps-javascript-code
+- https://www.exberliner.com/whats-on/food-drink/nanum/
+- https://www.standard.co.uk/go/london/restaurants/jimi-famurewa-restaurant-review-la-chingada-surrey-quays-a4366261.html
+- https://www.france-voyage.com/restaurants-guide/restaurant-nice-120949.htm
+- https://bigseventravel.com/2019/10/best-bars-in-nice/
+- https://www.girafeparis.com/en
+- https://www.booking.com/hotel/fr/la-nouvelle-republique.html?aid=356980&label=gog235jc-1DCAMoTTjjAkgzWANoaYgBAZgBMbgBB8gBDNgBA-gBAfgBAogCAagCA7gC0aO-9wXAAgHSAiRlYWMzMTQ1Zi05MTkyLTQ3NWYtOGM1NS0yYmQ4YjVhMDJhZjjYAgTgAgE&sid=c0209fec1728bf25488978eb82c8b64b&lp_sr_snippet=1
+- https://www.tripadvisor.ie/Restaurant_Review-g652116-d10446195-Reviews-Es_Tragon-Sant_Antoni_de_Portmany_Ibiza_Balearic_Islands.html
+- https://www.tripadvisor.ie/Attraction_Review-g642208-d4355606-Reviews-Liquido_Cocktail_Bar-Santa_Eulalia_del_Rio_Ibiza_Balearic_Islands.html
+- https://www.inspirock.com/spain/santa-eulalia-del-rio/liquido-cocktail-bar-a3165514397
+- https://www.tripadvisor.ie/ShowUserReviews-g642208-d4355606-r487945949-Liquido_Cocktail_Bar-Santa_Eulalia_del_Rio_Ibiza_Balearic_Islands.html
+- https://www.hrhibiza.com/amenities.htm
+- https://www.w3schools.com/jsref/met_element_addeventlistener.asp
+- https://www.partners.skyscanner.net/affiliates/widgets-quick-start
+- https://blog.hubspot.com/marketing/html-form-email
+- https://www.youtube.com/watch?v=GMXFMVg5E4U
+- https://developers.google.com/maps/documentation/javascript/examples/places-searchbox#maps_places_searchbox-javascript
+- https://www.geeksforgeeks.org/hide-or-show-elements-in-html-using-display-property/#:~:text=Style%20display%20property%20is%20used,getElementById(%22element%22).
+- https://developers.google.com/places/
+- https://getbootstrap.com/docs/4.5/getting-started/introduction/
