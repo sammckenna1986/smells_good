@@ -149,14 +149,12 @@ def edit_recipe(recipe_id):
     return render_template('edit_recipe.html', recipe=the_recipe, category_select=categories)
 
 # Posting the edit details
-@app.route('/push_edit/<recipe_id>', methods=["POST"])
+@app.route('/push_edit/<recipe_id>', methods=['POST'])
 def push_edit(recipe_id):
     recipes = mongo.db.recipes
-    categories = mongo.db.categories
     recipes.update( {'_id': ObjectId(recipe_id)},
     {
             'recipe_name':request.form.get('recipe_name'),
-            'category_select': request.form.get('category_select'),
             'recipe_description' : request.form.get('recipe_description'),
             'ingredients_list' : request.form.get('ingredients_list'),
             'cooking_instructions' : request.form.get('cooking_instructions'),
