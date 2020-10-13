@@ -137,46 +137,45 @@ I would love to have a focus group with a lot of people that use these websites 
     4. The 'Facebook share' button works correctly and shares the page to a users Facebook.
 
 ## Deployment
-- I deployed the website on [github pages](https://sammckenna1986.github.io/BeenThere-GoogleMapsApi/index.html)
-    1. Made sure that my github repository was up to date by 'git push' command in terminal.
-    2. Went to settings of that particular gihub repository.
-    3. Navigated to the github pages part of the settings and published the master branch.
-    4. Refreshed the page and then tried the blue hyperlink where the website was published at to make sure that it works.
-    5. Then I tested the deployment in responsinator to make sure that it looks good on all devices and that it is truly, phone-first, responsive.
-    
+- I deployed the website on [Heroku](https://smells-good.herokuapp.com/)
+    1. Created a Heroku account.
+    2. Link Heroku to my github account.
+    3. Chose which project to connect the Heroku application to on Github:sammckenna1986/smells_good 
+    4. Picked to deplouy the master branch.
+    5. Used the 'manual deploy' option and then pressed the 'deploy branch' button.
+    6. Waited for the deployment to finish successfully.
+    7. Checked the url to make sure that the website deployed successfully.    
 ## Credits
-- Thank you to Antonio Rodriguez, my mentor, who's three meetings on this project were excellent and helped me understand a few concepts that I was missing.
-- Thank you to Claire Lally for clarifying a few concepts on the phone and for providing some extra motivation.
+- Thank you to Antonio Rodriguez, my mentor, who is always a fountain of knowledge and really fun to learn from.
+- Thank you to Claire Roberts who asked a great question about her project in the slack channel which between the codeinstitute instructional videos and the answer to her question
+made me understand how the process works.
 - Thank you to all the teachers on the course; The videos and excercises were excellent.
 
 ### Content and Media
-- The blurbs for the cutomised google maps markers I got from the places' own websites.
-- The social media icons were from fontawesome.
-- All the pictures were copyright free and were downloaded from https://pixabay.com/.
-- The bean logo image I got from google images.
-
+- I created the smells good logo myself.
+- All of the recipes were taken from the great https://www.bbc.co.uk/food/recipes website.
+- The general stock pictures were taken from the pixabay.com website as they are royalty free.
 
 ### Acknowledgements
 
-I received a lot of inspiration and instruction from the following links:
-- https://developers.google.com/maps/documentation/javascript/cloud-based-map-styling
-- https://stackoverflow.com/questions/40064293/add-second-marker-on-google-maps-javascript-code
-- https://www.exberliner.com/whats-on/food-drink/nanum/
-- https://www.standard.co.uk/go/london/restaurants/jimi-famurewa-restaurant-review-la-chingada-surrey-quays-a4366261.html
-- https://www.france-voyage.com/restaurants-guide/restaurant-nice-120949.htm
-- https://bigseventravel.com/2019/10/best-bars-in-nice/
-- https://www.girafeparis.com/en
-- https://www.booking.com/hotel/fr/la-nouvelle-republique.html?aid=356980&label=gog235jc-1DCAMoTTjjAkgzWANoaYgBAZgBMbgBB8gBDNgBA-gBAfgBAogCAagCA7gC0aO-9wXAAgHSAiRlYWMzMTQ1Zi05MTkyLTQ3NWYtOGM1NS0yYmQ4YjVhMDJhZjjYAgTgAgE&sid=c0209fec1728bf25488978eb82c8b64b&lp_sr_snippet=1
-- https://www.tripadvisor.ie/Restaurant_Review-g652116-d10446195-Reviews-Es_Tragon-Sant_Antoni_de_Portmany_Ibiza_Balearic_Islands.html
-- https://www.tripadvisor.ie/Attraction_Review-g642208-d4355606-Reviews-Liquido_Cocktail_Bar-Santa_Eulalia_del_Rio_Ibiza_Balearic_Islands.html
-- https://www.inspirock.com/spain/santa-eulalia-del-rio/liquido-cocktail-bar-a3165514397
-- https://www.tripadvisor.ie/ShowUserReviews-g642208-d4355606-r487945949-Liquido_Cocktail_Bar-Santa_Eulalia_del_Rio_Ibiza_Balearic_Islands.html
-- https://www.hrhibiza.com/amenities.htm
-- https://www.w3schools.com/jsref/met_element_addeventlistener.asp
-- https://www.partners.skyscanner.net/affiliates/widgets-quick-start
-- https://blog.hubspot.com/marketing/html-form-email
-- https://www.youtube.com/watch?v=GMXFMVg5E4U
-- https://developers.google.com/maps/documentation/javascript/examples/places-searchbox#maps_places_searchbox-javascript
-- https://www.geeksforgeeks.org/hide-or-show-elements-in-html-using-display-property/#:~:text=Style%20display%20property%20is%20used,getElementById(%22element%22).
-- https://developers.google.com/places/
-- https://getbootstrap.com/docs/4.5/getting-started/introduction/
+I received a lot of inspiration and instruction from youtube this project and it really help drive a lot of concepts home for me:
+- Account Creation System:
+            - [Creating a User Login System Using Python, Flask and MongoDB](https://www.youtube.com/watch?v=vVx1737auSE&t=3s)
+- Environment variable to hide the secret key:
+            - [Python (Flask) - How to set up Environment Variables ( And What are they)](https://www.youtube.com/watch?v=3EuB7J5BnjE)
+- Login Functionality and password hashing:
+            - [Password Hashing in Flask Using Werkzeug](https://www.youtube.com/watch?v=jJ4awOToB6k)
+- Authentication and Authorization With Flask-Login:
+            - [Authentication and Authorization With Flask-Login](https://www.youtube.com/watch?v=K0vSCCAM2ss)
+- Build a Python CRUD REST API in Flask and MongoDB Using Flask-PyMongo Library:
+            -[ Link](https://www.youtube.com/watch?v=HyDACIfdPs0&t=1690s)
+
+The following were some of the recipes websites that I was looking at while creating this website:
+- https://www.bbcgoodfood.com/recipes
+- https://www.delish.com/cooking/recipe-ideas/g3166/cheap-easy-recipes/
+- https://www.seriouseats.com/
+- https://www.theguardian.com/tone/recipes
+- https://www.jamieoliver.com/recipes/
+- https://www.nigelslater.com/Home
+- https://www.nigella.com/recipes
+- https://myfoodbook.com.au/recipes/categories 
