@@ -1,6 +1,5 @@
-<img src="../static/branding/logo.png" >
+<img src="/static/branding/logo.png" >
 
-# Smells Good
 
 <b>Problem Statement</b><br>
 If you look at any other recipe sharing websites they are always really busy and their are always elements getting in the way of
@@ -29,19 +28,19 @@ they know exactly where to go for what overarching food scenario they are trying
 - A new user comes across the <b>Smells Good</b> website and is inspired by the simplicity of the design, the ease of which they can see the information, and high-resolution pictures of the food and chooses a recipe for the occasion that they want to cook for.
 
 
-<img src="../static/assets/images/md/index.png" style="height:20%;width:20%;margin-left:33%;">
+<img src="/static/assets/images/index.png">
 
 <b>User Story 2: Selecting a Recipe by Category</b><br>
 - The user is able to go to the website and choose a simple recipe category that interests them and chooses the correct recipe for the occasion at speed.  
 
-<img src="../static/assets/images/md/categories.png" style="height:20%;width:20%;margin-left:33%;">
+<img src="/static/assets/images/categories.png">
 
 <b>User Story 3: The user creates an account with Smells Good</b><br>
 - After the user has visited the website a few times and is really enjoying the whitespace and the ease of being able to see the recipe information, they decide to create an account with Smells Good. 
 They are really happy that Smells Good has made the sensible choice and is hashing all of the passwords and is not asking for their email address on login which makes the site a closed circuit and protects the users data and identity.
 <br><br>
 
-<img src="../static/assets/images/md/create_account.png" style="height:20%;width:20%;margin-left:33%;">
+<img src="/static/assets/images/create_account.png">
 
 <b>User Story 4: The user creates recipes and manages their 'my recipes' section of the website</b><br>
 - The user creates an account and is also asked to state their favourite chef, favourite cooking-utensil and favourite food.
@@ -50,8 +49,8 @@ Once they have created an account they are able to visit their own recipes, that
 part of the website to fit their needs by editing recipes as their recipes develop and improve over time,
 and they also can delete the recipes that they are no longer interested in.
 
-<img src="../static/assets/images/md/my_recipes.png" style="height:20%;width:20%;margin-left:33%;">
-<img src="../static/assets/images/md/create_account.png" style="height:20%;width:20%;margin-left:33%;">
+<img src="/static/assets/images/my_recipes.png">
+<img src="/static/assets/images/create_account.png">
 
 ## Features
 1) <b>Food Categories</b><br><br> 
@@ -111,7 +110,7 @@ I would love to have a focus group with a lot of people that use these websites 
 
 ## Testing
 <b>Testing Summary</b><br>
-
+<b>Responsinator:</b> [Link](https://www.responsinator.com/?url=https%3A%2F%2F8080-aa5ae074-9803-49bd-805e-afa25ed5fdf4.ws-eu01.gitpod.io%2F) 
 
 1. <b>User Story 1 & 2:</b> Be inspired and browse the recipe categories.
     1. Try to read all of the text on the index page and make sure that the text looks strong. - Success
@@ -136,8 +135,6 @@ I would love to have a focus group with a lot of people that use these websites 
     2. The 'edit' button works correctly and the information changes correctly in the mongodb recipe collection. - Success
     3. The 'delete' button works correctly and the recipe is deleted from the collection. - Success 
     4. The 'Facebook share' button works correctly and shares the page to a users Facebook.
-    12. Check the page in [responsinator](https://www.responsinator.com/?url=https%3A%2F%2Fsammckenna1986.github.io%2FBeenThere-GoogleMapsApi%2Fibiza.html) - Success
-
 
 ## Deployment
 - I deployed the website on [github pages](https://sammckenna1986.github.io/BeenThere-GoogleMapsApi/index.html)
